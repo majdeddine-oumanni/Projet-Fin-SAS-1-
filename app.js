@@ -166,6 +166,22 @@ function tripsFilter(){
     }
 }
 
+function tripsSortingByPrice(){
+    for(let i in trips){
+        
+        for(let j = 0; j < trips.length - 1; j++){
+            if(trips[j].price > trips[j+1].price){
+                let save = trips[j];
+                trips[j] = trips[j+1];
+                trips[j+1] = save;
+            }
+        }
+    }
+    for(let trip of trips){
+        console.log(`${trip.departure} --> ${trip.destination} : ${trip.price} DH`);
+    }
+}
+
 while (true) {
     console.log("======================================");
     console.log("         RAILWAY MANAGER              ");
@@ -207,6 +223,10 @@ while (true) {
 
         case 6:
             tripsFilter();
+            break;
+
+        case 7:
+            tripsSortingByPrice();
             break;
         case 0:
             process.exit(0);
