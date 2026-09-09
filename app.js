@@ -198,33 +198,19 @@ function ticketsRevenue(){
     console.log(`Chiffre d'affaires total : ${totalRevenue}`);
 }
 
-function mostSoldTrip() {
-    let tripsIdCounts = {};
+function mostSoldTrip(trips) {
+    let minimumSeatsTrip = trips[0];
 
-    for (let ticket of tickets) {
-        if (tripsIdCounts.hasOwnProperty(ticket.tripId)) {
-            tripsIdCounts[ticket.tripId] = tripsIdCounts[ticket.tripId] + 1;
-        } else {
-            tripsIdCounts[ticket.tripId] = 1;
+    for (let trip of trips) {
+        if (trip.availableSeats < minimumSeatsTrip.availableSeats) {
+            minimumSeatsTrip = trip;
         }
     }
 
-    let highestCount = 0;
-    let winnerTripId = "";
+    let ticketsSold = 50 - minimumSeatsTrip.availableSeats;
 
-    for (let tripId in tripsIdCounts) {
-        let currentCount = tripsIdCounts[tripId];
-
-        if (currentCount > highestCount) {
-            highestCount = currentCount;
-            winnerTripId = tripId;
-        }
-    }
-
-    let winnerTrip = trips.find(trip => trip.id == parseInt(winnerTripId));
-    console.log(`\n${winnerTrip.departure} --> ${winnerTrip.destination}`);
-    console.log(`${highestCount} tickets vendus\n`);
-
+    console.log(`\n${minimumSeatsTrip.departure} --> ${minimumSeatsTrip.destination}`);
+    console.log(`${ticketsSold} tickets vendus\n`);
 }
 
 while (true) {
