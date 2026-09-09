@@ -117,10 +117,16 @@ function ticketDisplay(tickets){
 
 function ticketDelete() {
     let ticketId = Number(prompt("Identifiant du ticket: "));
-
     let ticketIndex = tickets.findIndex(ticket => ticket.id == ticketId);
 
     if (ticketIndex !== -1) {
+        let deletedTicket = tickets[ticketIndex];
+
+        let bookedTrip = availableSeats.find(seat => seat.id == deletedTicket.tripId);
+        if (bookedTrip && bookedTrip.availableSeatsNum > 0) {
+            bookedTrip.availableSeatsNum--;
+        }
+
         tickets.splice(ticketIndex, 1);
         console.log("Ticket annulé avec succès.");
     } else {
@@ -198,7 +204,7 @@ function ticketsRevenue(){
     console.log(`Chiffre d'affaires total : ${totalRevenue}`);
 }
 
-function mostSoldTrip(trips) {
+function mostSoldTrip() {
     let minimumSeatsTrip = trips[0];
 
     for (let trip of trips) {
