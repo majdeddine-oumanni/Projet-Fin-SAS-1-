@@ -95,6 +95,26 @@ function ticketBuy() {
     console.log(ticketObject);
 }
 
+function ticketDisplay(tickets){
+    console.log("=== TICKETS ===");
+
+    let count = 0;
+
+    for (let ticket of tickets) {
+        count++;
+
+        let trajet = trips.find(trip => trip.id == ticket.tripId)
+
+        console.log(`
+            Ticket #${count}
+            Passager : ${ticket.passengerName}
+            Trajet : ${trajet.departure} → ${trajet.destination}
+            Place : ${ticket.seatNumber}
+            Prix : ${ticket.ticketPrice} DH
+        `);
+    }
+}
+
 
 while (true) {
     console.log("======================================");
@@ -123,6 +143,10 @@ while (true) {
             ticketBuy();
             break;
 
+        case 3:
+            ticketDisplay(tickets);
+            break;
+            
         case 0:
             process.exit(0);
     }
