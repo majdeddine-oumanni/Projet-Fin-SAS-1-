@@ -128,7 +128,24 @@ function ticketDelete() {
     }
 }
 
+function ticketResearch(){
+    let ticketOwner = prompt("Nom du passager : ");
+    let ticketGroup = [];
+    let found = false;
+    for(let ticket of tickets){
+        if(ticket.passengerName == ticketOwner){
+            ticketGroup.push(ticket);
+            found = true;
+        }
+    }
 
+    ticketDisplay(ticketGroup);
+
+    if(!found){
+        console.log("Ticket introuvable.");
+    }
+
+}
 
 while (true) {
     console.log("======================================");
@@ -165,6 +182,10 @@ while (true) {
             ticketDelete();
             break;
 
+        case 5:
+            ticketResearch();
+            break;
+            
         case 0:
             process.exit(0);
     }
