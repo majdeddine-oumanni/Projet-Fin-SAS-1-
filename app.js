@@ -147,6 +147,25 @@ function ticketResearch(){
 
 }
 
+function tripsFilter(){
+    let departCity = prompt("Ville de départ : ");
+    let tripsGroup = [];
+    let found = false;
+    for(let trip of trips){
+        if(trip.departure.toLocaleLowerCase() == departCity.trim().toLocaleLowerCase()){
+            tripsGroup.push(trip);
+            found = true;
+        }
+    }
+    if(found){
+        for(let trip of tripsGroup){
+            console.log(`${trip.departure} --> ${trip.destination} : ${trip.price} DH`);
+        }
+    }else if(!found){
+        console.log("Trajet introuvable.");
+    }
+}
+
 while (true) {
     console.log("======================================");
     console.log("         RAILWAY MANAGER              ");
@@ -185,7 +204,10 @@ while (true) {
         case 5:
             ticketResearch();
             break;
-            
+
+        case 6:
+            tripsFilter();
+            break;
         case 0:
             process.exit(0);
     }
