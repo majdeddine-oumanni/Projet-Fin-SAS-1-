@@ -178,8 +178,16 @@ function tripsSortingByPrice(){
         }
     }
     for(let trip of trips){
-        console.log(`${trip.departure} --> ${trip.destination} : ${trip.price} DH`);
+        console.log(`\n${trip.departure} --> ${trip.destination} : ${trip.price} DH`);
     }
+}
+
+function ticketTotalNumber(){
+    let somme = 0; 
+    for(let ticket in tickets){
+        somme++;
+    }
+    console.log(`\nNombre total de tickets : ${somme}\n`);
 }
 
 while (true) {
@@ -195,6 +203,7 @@ while (true) {
         "5. Rechercher un ticket \n" +
         "6. Filtrer les trajets \n" +
         "7. Trier les trajets \n" +
+        "8. Nombre total de tickets vendus \n" +
         "0. Quitter"
     );
 
@@ -228,7 +237,15 @@ while (true) {
         case 7:
             tripsSortingByPrice();
             break;
+
+        case 8:
+            ticketTotalNumber();
+            break;
+
         case 0:
             process.exit(0);
+        
+        default:
+            console.log("Choix invalide!!")
     }
 }
