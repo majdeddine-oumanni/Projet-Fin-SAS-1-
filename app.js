@@ -91,7 +91,7 @@ function ticketBuy() {
 
     tickets.push(ticketObject);
 
-    console.log("Ticket acheté avec succès.");
+    console.log("\nTicket acheté avec succès.\n");
     console.log(ticketObject);
 }
 
@@ -114,6 +114,20 @@ function ticketDisplay(tickets){
         `);
     }
 }
+
+function ticketDelete() {
+    let ticketId = Number(prompt("Identifiant du ticket: "));
+
+    let ticketIndex = tickets.findIndex(ticket => ticket.id == ticketId);
+
+    if (ticketIndex !== -1) {
+        tickets.splice(ticketIndex, 1);
+        console.log("Ticket annulé avec succès.");
+    } else {
+        console.log("Ticket introuvable.");
+    }
+}
+
 
 
 while (true) {
@@ -146,7 +160,11 @@ while (true) {
         case 3:
             ticketDisplay(tickets);
             break;
-            
+
+        case 4:
+            ticketDelete();
+            break;
+
         case 0:
             process.exit(0);
     }
