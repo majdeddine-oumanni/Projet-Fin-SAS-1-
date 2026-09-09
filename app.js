@@ -198,6 +198,34 @@ function ticketsRevenue(){
     console.log(`Chiffre d'affaires total : ${totalRevenue}`);
 }
 
+function mostSoldTrip() {
+    let tripsIdCounts = {};
+
+    for (let ticket of tickets) {
+        if (tripsIdCounts.hasOwnProperty(ticket.tripId)) {
+            tripsIdCounts[ticket.tripId] = tripsIdCounts[ticket.tripId] + 1;
+        } else {
+            tripsIdCounts[ticket.tripId] = 1;
+        }
+    }
+
+    let highestCount = 0;
+    let winnerTripId = "";
+
+    for (let tripId in tripsIdCounts) {
+        let currentCount = tripsIdCounts[tripId];
+
+        if (currentCount > highestCount) {
+            highestCount = currentCount;
+            winnerTripId = tripId;
+        }
+    }
+
+    let winnerTrip = trips.find(trip => trip.id == parseInt(winnerTripId));
+    console.log(`\n${winnerTrip.departure} --> ${winnerTrip.destination}`);
+    console.log(`${highestCount} tickets vendus\n`);
+
+}
 
 while (true) {
     console.log("======================================");
@@ -214,6 +242,7 @@ while (true) {
         "7. Trier les trajets \n" +
         "8. Nombre total de tickets vendus \n" +
         "9. Calculer la somme des prix des tickets. \n" +
+        "10. Afficher le Trajet le plus vendu. \n" +
         "0. Quitter"
     );
 
@@ -255,7 +284,11 @@ while (true) {
         case 9:
             ticketsRevenue();
             break;
-            
+
+        case 10:
+            mostSoldTrip();
+            break;
+
         case 0:
             process.exit(0);
         
