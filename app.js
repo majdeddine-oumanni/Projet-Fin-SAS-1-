@@ -190,6 +190,15 @@ function ticketTotalNumber(){
     console.log(`\nNombre total de tickets : ${somme}\n`);
 }
 
+function ticketsRevenue(){
+    let totalRevenue = 0; 
+    for(let ticket of tickets){
+        totalRevenue += ticket.ticketPrice;
+    }
+    console.log(`Chiffre d'affaires total : ${totalRevenue}`);
+}
+
+
 while (true) {
     console.log("======================================");
     console.log("         RAILWAY MANAGER              ");
@@ -204,6 +213,7 @@ while (true) {
         "6. Filtrer les trajets \n" +
         "7. Trier les trajets \n" +
         "8. Nombre total de tickets vendus \n" +
+        "9. Calculer la somme des prix des tickets. \n" +
         "0. Quitter"
     );
 
@@ -242,6 +252,10 @@ while (true) {
             ticketTotalNumber();
             break;
 
+        case 9:
+            ticketsRevenue();
+            break;
+            
         case 0:
             process.exit(0);
         
