@@ -95,20 +95,26 @@ function ticketBuy() {
     console.log(ticketObject);
 }
 
-function ticketDisplay(tickets){
-    console.log("=== TICKETS ===");
+function ticketDisplay(tickets) {
+    if (tickets.length === 0) {
+        console.log("\nAucun ticket trouvé.\n");
+        return;
+    }
 
+    console.log("=== TICKETS ===");
     let count = 0;
 
     for (let ticket of tickets) {
         count++;
+        let trajet = trips.find(trip => trip.id == ticket.tripId);
 
-        let trajet = trips.find(trip => trip.id == ticket.tripId)
+        let departure = trajet ? trajet.departure : "Inconnu";
+        let destination = trajet ? trajet.destination : "Inconnu";
 
         console.log(`
-            Ticket #${count}
+            Ticket #${count} (ID: ${ticket.id})
             Passager : ${ticket.passengerName}
-            Trajet : ${trajet.departure} → ${trajet.destination}
+            Trajet : ${departure} → ${destination}
             Place : ${ticket.seatNumber}
             Prix : ${ticket.ticketPrice} DH
         `);
