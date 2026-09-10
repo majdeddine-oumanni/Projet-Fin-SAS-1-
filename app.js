@@ -96,7 +96,7 @@ function ticketBuy() {
 }
 
 function ticketDisplay(tickets) {
-    if (tickets.length === 0) {
+    if (length(tickets) === 0) {
         console.log("\nAucun ticket trouvé.\n");
         return;
     }
@@ -145,7 +145,7 @@ function ticketResearch(){
     let ticketGroup = [];
     let found = false;
     for(let ticket of tickets){
-        if(ticket.passengerName == ticketOwner){
+        if(ticket.passengerName.toLowerCase() == ticketOwner.trim().toLowerCase()){
             ticketGroup.push(ticket);
             found = true;
         }
@@ -164,7 +164,7 @@ function tripsFilter(){
     let tripsGroup = [];
     let found = false;
     for(let trip of trips){
-        if(trip.departure.toLocaleLowerCase() == departCity.trim().toLocaleLowerCase()){
+        if(trip.departure.toLowerCase() == departCity.trim().toLowerCase()){
             tripsGroup.push(trip);
             found = true;
         }
@@ -181,7 +181,7 @@ function tripsFilter(){
 function tripsSortingByPrice(){
     for(let i in trips){
         
-        for(let j = 0; j < trips.length - 1; j++){
+        for(let j = 0; j < length(trips) - 1; j++){
             if(trips[j].price > trips[j+1].price){
                 let save = trips[j];
                 trips[j] = trips[j+1];
@@ -195,11 +195,7 @@ function tripsSortingByPrice(){
 }
 
 function ticketTotalNumber(){
-    let somme = 0; 
-    for(let ticket in tickets){
-        somme++;
-    }
-    console.log(`\nNombre total de tickets : ${somme}\n`);
+    console.log(`\nNombre total de tickets : ${length(tickets)}\n`);
 }
 
 function ticketsRevenue(){
@@ -223,6 +219,14 @@ function mostSoldTrip() {
 
     console.log(`\n${minimumSeatsTrip.departure} --> ${minimumSeatsTrip.destination}`);
     console.log(`${ticketsSold} tickets vendus\n`);
+}
+
+function length(arr){
+    let count=0;
+    for(let i of arr){
+        count++;
+    }
+    return count;
 }
 
 while (true) {
