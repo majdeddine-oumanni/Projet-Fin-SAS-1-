@@ -207,23 +207,27 @@ function ticketsRevenue(){
 }
 
 function mostSoldTrip() {
-    let minimumSeatsTrip = trips[0];
-
-    for (let trip of trips) {
-        if (trip.availableSeats < minimumSeatsTrip.availableSeats) {
-            minimumSeatsTrip = trip;
-        }
-    }
-
-    let ticketsSold = 50 - minimumSeatsTrip.availableSeats;
-    
-    if(ticketsSold == 50){
-        console.log("no tickets were Sold.");
+    if (length(tickets) === 0) {
+        console.log("Aucun ticket vendu.");
         return;
     }
 
-    console.log(`\n${minimumSeatsTrip.departure} --> ${minimumSeatsTrip.destination}`);
-    console.log(`${ticketsSold} tickets vendus\n`);
+    let mostSoldTrip = null;
+    let maxSoldSeats = 0;
+
+    for (let trip of trips) {
+        let bookedTrip = availableSeats.find(seat => seat.id == trip.id);
+
+        let soldSeats = bookedTrip ? bookedTrip.availableSeatsNum : 0;
+
+        if (soldSeats > maxSoldSeats) {
+            maxSoldSeats = soldSeats;
+            mostSoldTrip = trip;
+        }
+    }
+
+    console.log(`\n${mostSoldTrip.departure} --> ${mostSoldTrip.destination}`);
+    console.log(`${maxSoldSeats} tickets vendus\n`);
 }
 
 function length(arr){
