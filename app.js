@@ -216,6 +216,11 @@ function mostSoldTrip() {
     }
 
     let ticketsSold = 50 - minimumSeatsTrip.availableSeats;
+    
+    if(ticketsSold == 50){
+        console.log("no tickets were Sold.");
+        return;
+    }
 
     console.log(`\n${minimumSeatsTrip.departure} --> ${minimumSeatsTrip.destination}`);
     console.log(`${ticketsSold} tickets vendus\n`);
